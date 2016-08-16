@@ -1,5 +1,9 @@
+timestamp() {
+  date --iso-8601=seconds
+}
+
 info() {
-  echo "       $*" || true
+  echo "$(timestamp)         $*" || true
 }
 
 # format output and send a copy to the log
@@ -8,14 +12,14 @@ output() {
 
   while read LINE;
   do
-    echo "       $LINE" || true
-    echo "$LINE" >> "$logfile" || true
+    echo "$(timestamp)         $LINE" || true
+    echo "$(timestamp)  $LINE" >> "$logfile" || true
   done
 }
 
 header() {
-  echo "" || true
-  echo "-----> $*" || true
+  echo "$(timestamp)" || true
+  echo "$(timestamp)  -----> $*" || true
 }
 
 error() {
